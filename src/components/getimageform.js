@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import GetImageButton from './getimagebutton'
+import ImageDisplay from './imagedisplay'
 
 const API_KEY = "FPKJxnDFMAQE5rpVavzMktJFAzlsXFlLzI4sfi4c"
 
@@ -44,7 +45,10 @@ export default class GetImageForm extends Component {
 
     fetch(imageUrl)
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => {
+      console.log(json.photos);
+      this.setState({images: json.photos})
+    })
   }
 
   render() {
@@ -53,9 +57,9 @@ export default class GetImageForm extends Component {
         <form>
           <label htmlFor="rover">Rover</label>
           <select id="rover" value={this.state.rover} onChange={this.handleRover}>
-            <option value="curiosity">Curiosity</option>
-            <option value="opportunity">Opportunity</option>
-            <option value="spirit">Spirit</option>
+            <option value="Curiosity">Curiosity</option>
+            <option value="Opportunity">Opportunity</option>
+            <option value="Spirit">Spirit</option>
           </select>
           <label htmlFor="camera">Camera</label>
           <select id="camera" value={this.state.camera} onChange={this.handleCamera}>
@@ -67,6 +71,7 @@ export default class GetImageForm extends Component {
           <input type="number" onChange={this.handleSol} max="2000" min="1000" value={this.state.sol}/>
         </form>
         <GetImageButton onSubmit={this.handleSubmit} />
+        <ImageDisplay images={this.state.images} rover={this.state.rover} />
       </div>
     )
   }
