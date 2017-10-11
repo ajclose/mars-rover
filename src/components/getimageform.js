@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
+
+import GetImageButton from './getimagebutton'
+
 const API_KEY = "FPKJxnDFMAQE5rpVavzMktJFAzlsXFlLzI4sfi4c"
+
 
 export default class GetImageForm extends Component {
   constructor(props) {
@@ -13,7 +17,7 @@ export default class GetImageForm extends Component {
     this.state = {
       rover: "Curiosity",
       camera: "fhaz",
-      sol: "",
+      sol: 1000,
       images: []
     }
   }
@@ -45,23 +49,25 @@ export default class GetImageForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="rover">Rover</label>
-        <select id="rover" value={this.state.rover} onChange={this.handleRover}>
-          <option value="curiosity">Curiosity</option>
-          <option value="opportunity">Opportunity</option>
-          <option value="spirit">Spirit</option>
-        </select>
-        <label htmlFor="camera">Camera</label>
-        <select id="camera" value={this.state.camera} onChange={this.handleCamera}>
-          <option value="fhaz">FHAZ (Front Hazard)</option>
-          <option value="rhaz">RHAZ (Rear Hazard)</option>
-          <option value="navcam">NAVCAM (Navigation Cam)</option>
-        </select>
-        <label htmlFor="sol">Martian Sol: 1000-2000</label>
-        <input type="number" onChange={this.handleSol} max="2000" min="1000" value={this.state.sol}/>
-        <button type="submit">Get Rover Image</button>
-      </form>
+      <div>
+        <form>
+          <label htmlFor="rover">Rover</label>
+          <select id="rover" value={this.state.rover} onChange={this.handleRover}>
+            <option value="curiosity">Curiosity</option>
+            <option value="opportunity">Opportunity</option>
+            <option value="spirit">Spirit</option>
+          </select>
+          <label htmlFor="camera">Camera</label>
+          <select id="camera" value={this.state.camera} onChange={this.handleCamera}>
+            <option value="fhaz">FHAZ (Front Hazard)</option>
+            <option value="rhaz">RHAZ (Rear Hazard)</option>
+            <option value="navcam">NAVCAM (Navigation Cam)</option>
+          </select>
+          <label htmlFor="sol">Martian Sol: 1000-2000</label>
+          <input type="number" onChange={this.handleSol} max="2000" min="1000" value={this.state.sol}/>
+        </form>
+        <GetImageButton onSubmit={this.handleSubmit} />
+      </div>
     )
   }
 }
